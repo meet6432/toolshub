@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Subway Surfers Clone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+  <script src="script.js"></script>
+  <style>canvas {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid black;
+}</style>
+<script>const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Game dimensions
+    const canvasWidth = 800;
+    const canvasHeight = 500;
+    
+    // Character properties
+    const characterWidth = 50;
+    const characterHeight = 50;
+    let characterX = canvasWidth / 2;
+    let characterY = canvasHeight - characterHeight - 10;
+    let characterSpeed = 5;
+    
+    // Obstacle properties
+    const obstacleWidth = 50;
+    const obstacleHeight = 50;
+    let obstacleX = canvasWidth;
+    let obstacleY = canvasHeight - obstacleHeight;
+    let obstacleSpeed = 3;
+    
+    // Game loop
+    function gameLoop() {
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    
+      // Draw the character
+      ctx.fillStyle = 'blue';
+      ctx.fillRect(characterX, characterY, characterWidth, characterHeight);
+    
+      // Draw the obstacle
+      ctx.fillStyle = 'red';
+      ctx.fillRect(obstacleX, obstacleY, obstacleWidth, obstacleHeight);
+    
+      // Update obstacle position
+      obstacleX -= obstacleSpeed;
+    
+      // Check for collision
+      if (characterX < obstacleX + obstacleWidth &&
+          characterX + characterWidth > obstacleX &&
+          characterY < obstacleY + obstacleHeight &&
+          characterHeight + characterY > obstacleY) {
+        // Game over
+        alert('Game Over!');
+      }
+    
+      // Request the next frame
+      requestAnimationFrame(gameLoop);
+    }
+    
+    // Start the game
+    gameLoop();</script>
+</body>
+</html>
